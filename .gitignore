@@ -1,0 +1,15 @@
+node_modules/
+.env
+.env.*
+dist/
+build/
+
+frontend/node_modules/
+frontend/.env
+frontend/dist/
+
+backend/node_modules/
+backend/.env
+
+backend/uploads/*.png
+backend/uploads/*.webp
