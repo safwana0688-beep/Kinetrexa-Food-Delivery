@@ -4,7 +4,6 @@ import axios from "axios";
 
 const API_URL =
   "https://kinetrexa-food-delivery-ngmjyl7bz-safwana0688-beeps-projects.vercel.app";
-
 function Register() {
   const navigate = useNavigate();
 
@@ -32,15 +31,12 @@ function Register() {
     try {
       setLoading(true);
 
-      const response = await axios.post(
-        `${API_URL}/api/auth/register`,
-        {
-          name,
-          email,
-          password,
-          role: "user",
-        }
-      );
+      const response = await axios.post(`${API_URL}/api/auth/register`, {
+  name,
+  email,
+  password,
+  role: "user",
+});
 
       alert(
         response.data.message ||

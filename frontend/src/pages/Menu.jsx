@@ -4,7 +4,7 @@ import axios from "axios";
 
 // Deployed backend URL
 const API_URL =
-  "https://kinetrexa-food-delivery-ngmjyl7bz-safwana0688-beeps-projects.vercel.app";
+  "https://kinetrexa-food-delivery-1fnr.vercel.app";
 
 // Load all images from src/images
 const foodImages = import.meta.glob(

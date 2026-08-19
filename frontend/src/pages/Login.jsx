@@ -1,6 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const API_URL =
   "https://kinetrexa-food-delivery-ngmjyl7bz-safwana0688-beeps-projects.vercel.app";
@@ -76,8 +76,7 @@ function Login() {
           padding: "38px",
           borderRadius: "20px",
           background: "white",
-          boxShadow:
-            "0 15px 35px rgba(92, 52, 37, 0.15)",
+          boxShadow: "0 15px 35px rgba(92, 52, 37, 0.15)",
         }}
       >
         <Link
@@ -94,31 +93,15 @@ function Login() {
           🍕 Kinetrexa
         </Link>
 
-        <p
-          style={{
-            color: "#d94325",
-            fontWeight: "bold",
-            margin: 0,
-          }}
-        >
+        <p style={{ color: "#d94325", fontWeight: "bold", margin: 0 }}>
           WELCOME BACK
         </p>
 
-        <h1
-          style={{
-            margin: "10px 0",
-            color: "#2e1712",
-          }}
-        >
+        <h1 style={{ margin: "10px 0", color: "#2e1712" }}>
           Login to your account
         </h1>
 
-        <p
-          style={{
-            color: "#765b54",
-            marginBottom: "25px",
-          }}
-        >
+        <p style={{ color: "#765b54", marginBottom: "25px" }}>
           Order food and track every delivery in one place.
         </p>
 
