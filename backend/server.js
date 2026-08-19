@@ -17,7 +17,10 @@ app.use(cors());
 app.use(express.json());
 
 // Serve uploaded images
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use(
+  "/uploads",
+  express.static(path.join(__dirname, "uploads"))
+);
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -38,12 +41,22 @@ mongoose
     console.log("MongoDB connected successfully");
   })
   .catch((error) => {
-    console.error("MongoDB connection failed:", error.message);
+    console.error(
+      "MongoDB connection failed:",
+      error.message
+    );
   });
 
-// Start server
-const PORT = process.env.PORT || 5000;
+// Export app for Vercel
+module.exports = app;
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+// Run locally
+if (require.main === module) {
+  const PORT = process.env.PORT || 5000;
+
+  app.listen(PORT, () => {
+    console.log(
+      `Server running on http://localhost:${PORT}`
+    );
+  });
+}
