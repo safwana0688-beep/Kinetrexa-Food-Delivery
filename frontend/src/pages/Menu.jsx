@@ -2,6 +2,10 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+// Deployed backend URL
+const API_URL =
+  "https://kinetrexa-food-delivery-ngmjyl7bz-safwana0688-beeps-projects.vercel.app";
+
 // Load all images from src/images
 const foodImages = import.meta.glob(
   "../images/*.{jpg,jpeg,png,webp}",
@@ -38,7 +42,6 @@ function Menu() {
   const [loading, setLoading] = useState(true);
   const [cart, setCart] = useState([]);
 
-  // NEW: Search and category
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] =
     useState("All");
@@ -46,7 +49,7 @@ function Menu() {
   // Load foods and cart
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/foods")
+      .get(`${API_URL}/api/foods`)
       .then((response) => {
         setFoods(response.data);
         setLoading(false);
@@ -109,9 +112,10 @@ function Menu() {
     const existingItem = cart.find(
       (item) => item._id === food._id
     );
-const foodImage = food.image
-  ? `http://localhost:5000${food.image}`
-  : getFoodImage(food.name); 
+
+    const foodImage = food.image
+      ? `${API_URL}${food.image}`
+      : getFoodImage(food.name);
 
     const updatedCart = existingItem
       ? cart.map((item) =>
@@ -148,7 +152,7 @@ const foodImage = food.image
     0
   );
 
-  // NEW: Get categories from food data
+  // Get categories from food data
   const categories = [
     "All",
     ...new Set(
@@ -158,7 +162,7 @@ const foodImage = food.image
     ),
   ];
 
-  // NEW: Filter foods by search and category
+  // Filter foods by search and category
   const filteredFoods = foods.filter((food) => {
     const searchText = search.toLowerCase().trim();
 
@@ -211,7 +215,6 @@ const foodImage = food.image
           flexWrap: "wrap",
         }}
       >
-        {/* Logo */}
         <Link
           to="/"
           style={{
@@ -224,7 +227,6 @@ const foodImage = food.image
           🍕 Kinetrexa
         </Link>
 
-        {/* Navigation */}
         <div
           style={{
             display: "flex",
@@ -232,7 +234,6 @@ const foodImage = food.image
             flexWrap: "wrap",
           }}
         >
-          {/* Home Button */}
           <Link
             to="/"
             style={{
@@ -248,7 +249,6 @@ const foodImage = food.image
             Home
           </Link>
 
-          {/* Cart */}
           <Link
             to="/cart"
             style={{
@@ -400,7 +400,6 @@ const foodImage = food.image
             No food items available yet.
           </p>
         ) : filteredFoods.length === 0 ? (
-          /* NO SEARCH RESULTS */
           <section
             style={{
               background: "white",
@@ -458,7 +457,6 @@ const foodImage = food.image
           </section>
         ) : (
           <>
-            {/* RESULT COUNT */}
             <p
               style={{
                 color: "#765b54",
@@ -480,8 +478,8 @@ const foodImage = food.image
             >
               {filteredFoods.map((food) => {
                 const image = food.image
-  ? `http://localhost:5000${food.image}`
-  : getFoodImage(food.name);
+                  ? `${API_URL}${food.image}`
+                  : getFoodImage(food.name);
 
                 const foodId = `food-${food.name
                   .toLowerCase()
@@ -502,7 +500,6 @@ const foodImage = food.image
                       width: "100%",
                     }}
                   >
-                    {/* FOOD IMAGE */}
                     <div
                       style={{
                         height:
@@ -541,13 +538,11 @@ const foodImage = food.image
                       )}
                     </div>
 
-                    {/* FOOD DETAILS */}
                     <div
                       style={{
                         padding: "20px",
                       }}
                     >
-                      {/* CATEGORY LABEL */}
                       {food.category && (
                         <span
                           style={{
@@ -587,7 +582,6 @@ const foodImage = food.image
                         {food.description}
                       </p>
 
-                      {/* PRICE + ADD BUTTON */}
                       <div
                         style={{
                           display: "flex",

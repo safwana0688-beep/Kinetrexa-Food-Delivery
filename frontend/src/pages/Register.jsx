@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const API_URL =
+  "https://kinetrexa-food-delivery-ngmjyl7bz-safwana0688-beeps-projects.vercel.app";
+
 function Register() {
   const navigate = useNavigate();
 
@@ -30,7 +33,7 @@ function Register() {
       setLoading(true);
 
       const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
+        `${API_URL}/api/auth/register`,
         {
           name,
           email,
@@ -145,6 +148,7 @@ function Register() {
             onChange={(event) =>
               setName(event.target.value)
             }
+            required
             style={{
               width: "100%",
               boxSizing: "border-box",
@@ -174,6 +178,7 @@ function Register() {
             onChange={(event) =>
               setEmail(event.target.value)
             }
+            required
             style={{
               width: "100%",
               boxSizing: "border-box",
@@ -203,6 +208,7 @@ function Register() {
             onChange={(event) =>
               setPassword(event.target.value)
             }
+            required
             style={{
               width: "100%",
               boxSizing: "border-box",

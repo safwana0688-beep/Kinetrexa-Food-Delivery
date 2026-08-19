@@ -2,6 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
+const API_URL =
+  "https://kinetrexa-food-delivery-ngmjyl7bz-safwana0688-beeps-projects.vercel.app";
+
 function Login() {
   const navigate = useNavigate();
 
@@ -25,20 +28,32 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        `${API_URL}/api/auth/login`,
         formData
       );
 
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
+      localStorage.setItem(
+        "user",
+        JSON.stringify(response.data.user)
+      );
 
       setMessage("Login successful!");
 
       setTimeout(() => {
-        navigate(response.data.user.role === "admin" ? "/admin" : "/");
+        navigate(
+          response.data.user.role === "admin"
+            ? "/admin"
+            : "/"
+        );
       }, 700);
     } catch (error) {
-      setMessage(error.response?.data?.message || "Login failed");
+      console.error("Login error:", error);
+
+      setMessage(
+        error.response?.data?.message ||
+          "Login failed. Please try again."
+      );
     }
   };
 
@@ -61,7 +76,8 @@ function Login() {
           padding: "38px",
           borderRadius: "20px",
           background: "white",
-          boxShadow: "0 15px 35px rgba(92, 52, 37, 0.15)",
+          boxShadow:
+            "0 15px 35px rgba(92, 52, 37, 0.15)",
         }}
       >
         <Link
@@ -78,15 +94,31 @@ function Login() {
           🍕 Kinetrexa
         </Link>
 
-        <p style={{ color: "#d94325", fontWeight: "bold", margin: 0 }}>
+        <p
+          style={{
+            color: "#d94325",
+            fontWeight: "bold",
+            margin: 0,
+          }}
+        >
           WELCOME BACK
         </p>
 
-        <h1 style={{ margin: "10px 0", color: "#2e1712" }}>
+        <h1
+          style={{
+            margin: "10px 0",
+            color: "#2e1712",
+          }}
+        >
           Login to your account
         </h1>
 
-        <p style={{ color: "#765b54", marginBottom: "25px" }}>
+        <p
+          style={{
+            color: "#765b54",
+            marginBottom: "25px",
+          }}
+        >
           Order food and track every delivery in one place.
         </p>
 
@@ -174,17 +206,33 @@ function Login() {
               padding: "10px",
               textAlign: "center",
               borderRadius: "8px",
-              background: message.includes("successful") ? "#dcfce7" : "#fff3e8",
-              color: message.includes("successful") ? "#15803d" : "#b45309",
+              background: message.includes("successful")
+                ? "#dcfce7"
+                : "#fff3e8",
+              color: message.includes("successful")
+                ? "#15803d"
+                : "#b45309",
             }}
           >
             {message}
           </p>
         )}
 
-        <p style={{ textAlign: "center", marginTop: "25px", color: "#765b54" }}>
+        <p
+          style={{
+            textAlign: "center",
+            marginTop: "25px",
+            color: "#765b54",
+          }}
+        >
           New here?{" "}
-          <Link to="/register" style={{ color: "#ff5a36", fontWeight: "bold" }}>
+          <Link
+            to="/register"
+            style={{
+              color: "#ff5a36",
+              fontWeight: "bold",
+            }}
+          >
             Create an account
           </Link>
         </p>
